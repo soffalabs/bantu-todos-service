@@ -7,9 +7,13 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   IMAGE_VERSION: ${{ github.run_number }}
+  SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+  SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+  SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
+  SIGNING_PASSWORD: ${{ secrets.OSSRH_SIGNING_PASSWORD }}
+  SONATYPE_GPG: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
 
 jobs:
-
   check:
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +23,7 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
       - name: Run checks
-        run: gradle check
+        run: gradle check -PossrhUsername=foo -PossrhPassword=foo -Psigning.keyId=foo -Psigning.password=foo -Psigning.secretKeyRingFile=foo -Pverbose=true
 
 #  publish-to-sonatype:
 #    needs: check
@@ -55,6 +59,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push image to GitHub Container Registry
-        run: gradle jib --image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -Djib.to.tags="${{ env.IMAGE_VERSION }},latest" -x test
+        run: |
+          gradle jib --image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -Djib.to.tags="${{ env.IMAGE_VERSION }},latest" -x test \
+          -PossrhUsername=foo -PossrhPassword=foo -Psigning.keyId=foo -Psigning.password=foo -Psigning.secretKeyRingFile=foo -Pverbose=true
         env:
           PKG_TOKEN: ${{ secrets.PKG_TOKEN }}

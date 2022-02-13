@@ -18,3 +18,9 @@ spring.config.import:
   - classpath:application-foundation.yml
   - classpath:openapi.yml
 
+---
+spring.config.activate.on-profile: prod | production | prd
+app.consul.discovery: true
+app.nats.enabled: true
+app.nats.url: ${NATS_URL}
+app.nats.queue: bantu-service
