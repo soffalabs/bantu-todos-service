@@ -14,6 +14,8 @@ app.db:
       url: ${DATABASE_URL}?schema=__TENANT__
       migration: true
 
+app.consul.tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
+
 spring.config.import:
   - classpath:application-foundation.yml
   - classpath:openapi.yml
