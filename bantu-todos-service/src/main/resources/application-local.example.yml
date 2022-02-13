@@ -1,0 +1,2 @@
+app.db.links:
+  default: h2://mem/application

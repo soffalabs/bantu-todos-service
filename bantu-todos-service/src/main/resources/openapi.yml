@@ -1,0 +1,20 @@
+app.openapi:
+  info:
+    title: Demo API
+    version: 1.0.0
+    description: Foundation demo API
+    contact:
+      name: Name of your trea
+      url: http://noop
+      email: noreply@email.com
+  security:
+    oauth2:
+      url: ${OAUTH2_SERVER:http://localhost:9000}
+      scopes: ${OAUTH2_SCOPES:openid}
+      authorizationCode: true
+  parameters:
+    - name: X-TenantId
+      in: header
+      description: |
+        Markdown description of the header paramter
+      values: [ T1, T2n ]

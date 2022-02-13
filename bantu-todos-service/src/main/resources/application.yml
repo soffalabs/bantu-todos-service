@@ -1,0 +1,20 @@
+spring.application.name: bantu-todos
+server.servlet.contextPath: ${CONTEXT_PATH:/todos}
+logging.level.dev.bantu: ${LOG_LEVEL:DEBUG}
+
+app.package: dev.bantu
+
+app.db:
+  tables-prefix: todos
+  datasources:
+    default:
+      url: ${DATABASE_URL}?schema=public
+      migration: false
+    __TENANT__:
+      url: ${DATABASE_URL}?schema=__TENANT__
+      migration: true
+
+spring.config.import:
+  - classpath:application-foundation.yml
+  - classpath:openapi.yml
+
