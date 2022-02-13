@@ -6,9 +6,9 @@ import io.soffa.foundation.messages.BinaryClient
 import org.springframework.stereotype.Component
 
 @Component
-class LocalTenantsProvider(private val client: BinaryClient) : TenantsLoader {
+class LocalTenantsProvider : TenantsLoader {
 
-    override fun getTenantList(): Set<String> {
+    override fun getTenantList(client: BinaryClient): Set<String> {
         val list = client.request("bantu-accounts", GetTenantList::class.java).get()
         return list.tenants.toSet()
     }
