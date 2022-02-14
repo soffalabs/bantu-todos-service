@@ -14,6 +14,12 @@ app.db:
       url: ${DATABASE_URL}?schema=__TENANT__
       migration: true
 
+app.security.tokens:
+  issuer: ${TOKEN_ISSUER:bantu}
+  secret: ${TOKEN_SECRET}
+  default-ttl: 5
+  service-token: ${SERVICE_TOKEN}
+
 app.consul.tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
 
 spring.config.import:
