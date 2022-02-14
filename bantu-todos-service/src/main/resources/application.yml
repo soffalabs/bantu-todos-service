@@ -29,3 +29,5 @@ spring.config.import:
   - classpath:application-foundation.yml
   - classpath:openapi.yml
 
+spring.profiles.group.production: json-logs,foundation-vault,foundation-consul,foundation-nats
+
