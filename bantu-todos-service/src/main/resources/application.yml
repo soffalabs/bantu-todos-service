@@ -23,7 +23,7 @@ app.security.tokens:
 app.consul.tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
 
 app.nats.clients.default:
-  broadcast: bantu-services
+  broadcast: ${BROADCAST_SUBJECT:bantu-services}
 
 spring.config.import:
   - classpath:application-foundation.yml
