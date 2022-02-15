@@ -14,7 +14,7 @@
             <column name="content" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="status" type="varchar(64)">
+            <column name="status" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
