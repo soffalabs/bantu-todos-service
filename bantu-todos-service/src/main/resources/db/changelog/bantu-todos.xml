@@ -9,7 +9,7 @@
 
         <createTable tableName="${table_prefix}todos">
             <column name="id" type="varchar">
-                <constraints primaryKey="true" primaryKeyName="${table_prefix}accounts_pk"/>
+                <constraints primaryKey="true" primaryKeyName="${table_prefix}todos_pk"/>
             </column>
             <column name="content" type="varchar">
                 <constraints nullable="false"/>
