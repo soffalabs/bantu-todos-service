@@ -1,3 +1,7 @@
 DATABASE_URL: h2://mem/__TENANT__
 TOKEN_SECRET: XoEH&!TWrQ&T
+PUBSUB_ADDRESSES: simple
 
+app.pubsub:
+  clients.default:
+    subjects: ${spring.application.name},${PUBSUB_BROADCAST:bantu-services}*,bantu-accounts

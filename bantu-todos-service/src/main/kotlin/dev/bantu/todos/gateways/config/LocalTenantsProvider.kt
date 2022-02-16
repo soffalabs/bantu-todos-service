@@ -23,17 +23,14 @@ class LocalTenantsProvider(
     }
 
     override fun getTenantList(): Set<String> {
-
         val operation = client.proxy(AccountClient.ID, GetTenantList::class.java);
-
         return try {
             val token = tokens.create(TokenType.JWT, app.name, mapOf("permissions" to "service")).value
             val context = RequestContext().withAuthorization("Bearer $token")
-            return operation.handle(null, context)?.tenants.orEmpty().toSet()
+            operation.handle(null, context)?.tenants.orEmpty().toSet()
         } catch (e: Exception) {
-            e.printStackTrace();
             logger.error("Unable to fetch tenants list from bantu-accounts, make sure the service is reachable", e)
-            emptySet();
+            emptySet()
         }
     }
 }

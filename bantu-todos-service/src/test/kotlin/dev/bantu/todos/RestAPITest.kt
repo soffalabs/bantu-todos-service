@@ -1,9 +1,9 @@
 package dev.bantu.todos
 
+import io.soffa.foundation.security.TokenProvider
+import io.soffa.foundation.security.model.TokenType
 import io.soffa.foundation.test.DatabaseTest
 import io.soffa.foundation.test.HttpExpect
-import io.soffa.foundation.tokens.TokenProvider
-import io.soffa.foundation.tokens.TokenType
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
