@@ -4,12 +4,12 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class Bootstrap {
+class Todos {
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            SpringApplication.run(Bootstrap::class.java, *args)
+            SpringApplication.run(Todos::class.java, *args)
         }
     }
 

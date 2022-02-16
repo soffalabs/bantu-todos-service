@@ -1,4 +1,4 @@
-package dev.bantu.todos.core.operation
+package dev.bantu.todos.core.events
 
 import dev.bantu.accounts.api.model.CreateApplicationOutput
 import io.soffa.foundation.annotations.Handle
@@ -6,7 +6,7 @@ import io.soffa.foundation.api.Operation
 import io.soffa.foundation.commons.Logger
 import io.soffa.foundation.context.RequestContext
 import io.soffa.foundation.data.DB
-import io.soffa.foundation.model.Ack
+import io.soffa.foundation.models.commons.Ack
 import javax.inject.Named
 
 @Named

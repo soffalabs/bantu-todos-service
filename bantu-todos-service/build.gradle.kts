@@ -8,5 +8,6 @@ dependencies {
     implementation(project(":bantu-todos-core"))
 
     implementation("io.soffa.foundation:soffa-foundation-service:${property("foundation.version")}")
+    implementation("io.soffa.foundation:soffa-foundation-support-pubsub:${property("foundation.version")}")
     testImplementation("io.soffa.foundation:soffa-foundation-test:${property("foundation.version")}")
 }
