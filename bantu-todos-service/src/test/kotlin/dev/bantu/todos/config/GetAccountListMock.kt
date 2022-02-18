@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component
 class GetAccountListMock : Operation<Void, TenantList> {
 
     override fun handle(input: Void?, context: RequestContext): TenantList {
-        return TenantList(mutableListOf("tx01"))
+        return TenantList(setOf("tx01"))
     }
 }
