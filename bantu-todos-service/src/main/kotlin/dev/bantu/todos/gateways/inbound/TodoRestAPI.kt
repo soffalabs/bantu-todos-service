@@ -5,6 +5,7 @@ import dev.bantu.todos.api.model.AddTodoInput
 import dev.bantu.todos.api.model.Todo
 import dev.bantu.todos.api.operation.AddTodo
 import dev.bantu.todos.api.operation.GetTodoList
+import dev.bantu.todos.core.App
 import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.application.OperationHandler
 import org.springframework.http.MediaType
@@ -18,11 +19,11 @@ import javax.validation.Valid
 class TodoRestAPI(private val operations: OperationHandler) : TodoAPI {
 
     @GetMapping
-    @RolesAllowed("application")
+    @RolesAllowed(App.ROLE_APPLICATION)
     override fun todos(): List<Todo> = operations.handle(GetTodoList::class.java)
 
     @PostMapping
-    @RolesAllowed("application")
+    @RolesAllowed(App.ROLE_APPLICATION)
     override fun addTodo(@RequestBody @Valid input: AddTodoInput): Todo {
         return operations.handle(AddTodo::class.java, input)
     }
