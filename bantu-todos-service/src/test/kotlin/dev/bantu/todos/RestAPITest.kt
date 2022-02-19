@@ -27,7 +27,8 @@ class RestAPITest : DatabaseTest() {
         val test = HttpExpect(mvc)
         val token = tokens.create(
             TokenType.JWT, "app-0001", mapOf(
-                "tenant" to "tx01"
+                "tenant" to "tx01",
+                "permissions" to "application"
             )
         )
         test.get("/v1").bearerAuth(token.value).expect().isOK
@@ -44,6 +45,7 @@ class RestAPITest : DatabaseTest() {
         val test = HttpExpect(mvc)
         val token = tokens.create(
             TokenType.JWT, "app-0001", mapOf(
+                "permissions" to "application",
                 "tenant" to "tx02" // This tenant does not exist
             )
         )
