@@ -8,7 +8,6 @@ import io.soffa.foundation.context.RequestContext
 import io.soffa.foundation.data.DB
 import io.soffa.foundation.model.Message
 import io.soffa.foundation.pubsub.MessageHandler
-import io.soffa.foundation.test.DatabaseTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +18,7 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class AccountEventTests : DatabaseTest() {
+class AccountEventTests {
 
     @Autowired
     private lateinit var messenger: MessageHandler
