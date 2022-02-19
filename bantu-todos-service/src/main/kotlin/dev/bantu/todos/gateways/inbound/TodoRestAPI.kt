@@ -9,6 +9,7 @@ import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.application.OperationHandler
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import javax.annotation.security.RolesAllowed
 import javax.validation.Valid
 
 @RestController
@@ -17,9 +18,11 @@ import javax.validation.Valid
 class TodoRestAPI(private val operations: OperationHandler) : TodoAPI {
 
     @GetMapping
+    @RolesAllowed("application")
     override fun todos(): List<Todo> = operations.handle(GetTodoList::class.java)
 
     @PostMapping
+    @RolesAllowed("application")
     override fun addTodo(@RequestBody @Valid input: AddTodoInput): Todo {
         return operations.handle(AddTodo::class.java, input)
     }
