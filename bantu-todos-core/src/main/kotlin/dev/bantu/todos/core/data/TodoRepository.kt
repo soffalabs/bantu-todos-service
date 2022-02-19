@@ -8,4 +8,6 @@ interface TodoRepository {
 
     fun findAll(): List<Todo>
 
+    fun findById(id: String): Todo?
+
 }

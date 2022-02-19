@@ -8,11 +8,11 @@ import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.annotations.TenantRequired
 import io.soffa.foundation.commons.IdGenerator
 import io.soffa.foundation.context.RequestContext
-import java.util.*
+import java.time.Instant
 import javax.inject.Named
 
 @Named
-open class AddTodoListImpl(private val todos: TodoRepository) : AddTodo {
+open class DoAddTodoList(private val todos: TodoRepository) : AddTodo {
 
     @TenantRequired
     @Authenticated
@@ -21,10 +21,10 @@ open class AddTodoListImpl(private val todos: TodoRepository) : AddTodo {
             IdGenerator.shortUUID("t"),
             input.content!!,
             false,
-            Date()
+            Instant.now().toEpochMilli()
         )
-        todos.save(todo);
-        return todo;
+        todos.save(todo)
+        return todo
     }
 
 }

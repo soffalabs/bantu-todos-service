@@ -2,4 +2,4 @@ package dev.bantu.todos.gateways.outbound.jpa
 
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface MessageJpaRepository: JpaRepository<TodoEntity, String>
+interface TodoJpaRepository: JpaRepository<TodoEntity, String>

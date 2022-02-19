@@ -1,6 +1,7 @@
 package dev.bantu.todos.gateways.outbound.jpa
 
 import dev.bantu.todos.api.model.Todo
+import io.soffa.foundation.commons.BeanUtil
 import java.util.*
 import javax.persistence.*
 
@@ -21,7 +22,7 @@ data class TodoEntity(
             id = id!!,
             content = content!!,
             done = status == TodoStatus.DONE,
-            createdAt = createdAt!!
+            createdAt = createdAt!!.toInstant().toEpochMilli()
         )
     }
 
@@ -31,8 +32,8 @@ data class TodoEntity(
             return TodoEntity(
                 id = todo.id,
                 content = todo.content,
-                status = if (todo.done) TodoStatus.DONE else TodoStatus.PENDING,
-                createdAt = todo.createdAt
+                status = if (todo.done == true) TodoStatus.DONE else TodoStatus.PENDING,
+                createdAt = Date(todo.createdAt!!)
             )
         }
 

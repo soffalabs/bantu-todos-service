@@ -1,26 +1,30 @@
 package dev.bantu.todos
 
+import com.intuit.karate.junit5.Karate
 import io.soffa.foundation.data.DB
 import io.soffa.foundation.security.TokenProvider
 import io.soffa.foundation.security.model.TokenType
-import io.soffa.foundation.test.HttpExpect
 import org.awaitility.Awaitility
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.web.servlet.MockMvc
 import java.util.concurrent.TimeUnit
 
-@SpringBootTest
-@ActiveProfiles("test")
-@AutoConfigureMockMvc
-class RestAPITest {
 
-    @Autowired
-    private lateinit var mvc: MockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+class FeatureTest {
+
+    @LocalServerPort
+    private val port = 0
+
+    @Value("\${server.servlet.contextPath}")
+    private var contextPath: String? = null
 
     @Autowired
     private lateinit var tokens: TokenProvider
@@ -35,34 +39,36 @@ class RestAPITest {
         }
     }
 
-    @Test
-    fun testAPI() {
-        val test = HttpExpect(mvc)
+    @Karate.Test
+    fun testNominalScenarios(): Karate {
         val token = tokens.create(
             TokenType.JWT, "app-0001", mapOf(
                 "tenant" to "tx01",
                 "permissions" to "application"
-            )
+            ), 30
         )
-        test.get("/v1").bearerAuth(token.value).expect().isOK
-
-        test.post("/v1").withJson(mapOf(
-            "content" to "Release bantu-todos"
-        )).bearerAuth(token.value).expect().isOK.hasJson("$.id")
-
-        test.get("/v1").bearerAuth(token.value).expect().isOK.hasJson("$[0].id")
+        return Karate.run(
+            feature("actuator"),
+            feature("nominal"),
+        ).systemProperty("baseUrl", "http://localhost:$port$contextPath")
+            .systemProperty("authToken", token.value)
     }
 
-    @Test
-    fun testInvalidData() {
-        val test = HttpExpect(mvc)
+    @Karate.Test
+    fun testErrors(): Karate {
         val token = tokens.create(
             TokenType.JWT, "app-0001", mapOf(
                 "permissions" to "application",
                 "tenant" to "tx02" // This tenant does not exist
             )
         )
-        test.get("/v1").bearerAuth(token.value).expect().isBadRequest
+        return Karate.run(
+            feature("errors"),
+        ).systemProperty("baseUrl", "http://localhost:$port$contextPath")
+            .systemProperty("authToken", token.value)
     }
+
+    private fun feature(name: String) = "classpath:/feature/$name.feature"
+
 
 }

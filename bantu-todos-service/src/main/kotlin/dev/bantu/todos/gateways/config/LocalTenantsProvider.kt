@@ -27,7 +27,8 @@ class LocalTenantsProvider(
         return try {
             val token = tokens.create(TokenType.JWT, app.name, mapOf("permissions" to "service")).value
             val context = RequestContext().withAuthorization("Bearer $token")
-            operation.handle(null, context)?.tenants.orEmpty().toSet()
+            val res = operation.handle(null, context) ?: return emptySet()
+            return res.tenants.toSet()
         } catch (e: Exception) {
             logger.error("Unable to fetch tenants list from bantu-accounts, make sure the service is reachable", e)
             emptySet()
