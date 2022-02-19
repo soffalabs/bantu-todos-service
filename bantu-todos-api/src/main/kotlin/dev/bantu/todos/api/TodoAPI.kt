@@ -32,7 +32,7 @@ interface TodoAPI {
     @Operation(
         method = "PATCH",
         summary = "Mark todo ask complete",
-        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH)]
+        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to mark complete", example = "t_12345678")]
     )
     @BindOperation(CompleteTodo::class)
     fun completeTodo(input: CompleteTodoInput): Todo
