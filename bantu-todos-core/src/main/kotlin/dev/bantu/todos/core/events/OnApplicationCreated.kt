@@ -21,6 +21,7 @@ class OnApplicationCreated(private val ds: DB) : Operation<CreateApplicationOutp
         val tenantId = input.application!!.id!!.value
         LOG.info("A new application [%s] was created, applying migrations", tenantId)
         ds.applyMigrations(tenantId)
+        ds.applyMigrations("${tenantId}_test")
         return Ack.OK
     }
 
