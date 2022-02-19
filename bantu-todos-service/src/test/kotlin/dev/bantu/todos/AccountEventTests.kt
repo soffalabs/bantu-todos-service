@@ -17,7 +17,7 @@ import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
+@ActiveProfiles("test", "foundation-pubsub")
 class AccountEventTests {
 
     @Autowired

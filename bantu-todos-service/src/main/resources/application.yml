@@ -25,14 +25,13 @@ app.nats.clients.default:
   broadcast: ${BROADCAST_SUBJECT:bantu-services}
 
 app.pubsub:
-  enabled: true
   clients.default:
     subjects: ${spring.application.name},${PUBSUB_BROADCAST:bantu-services}*
-    addresses: ${PUBSUB_ADDRESSES}
 
 spring.config.import:
   - classpath:application-foundation.yml
+  - classpath:application-foundation-pubsub.yml
   - classpath:openapi.yml
 
-spring.profiles.group.production: json-logs,foundation-vault,foundation-consul,foundation-nats
+spring.profiles.group.production: json-logs,foundation-vault,foundation-consul
 
