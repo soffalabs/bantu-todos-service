@@ -34,7 +34,7 @@ class FeatureTest {
 
     @BeforeEach
     fun prepare() {
-        Awaitility.await().atMost(2, TimeUnit.SECONDS).until {
+        Awaitility.await().atMost(500, TimeUnit.MILLISECONDS).until {
             db.tenantExists("tx01")
         }
     }

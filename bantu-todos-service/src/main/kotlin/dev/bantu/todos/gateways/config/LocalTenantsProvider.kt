@@ -6,7 +6,7 @@ import io.soffa.foundation.core.AppConfig
 import io.soffa.foundation.core.context.DefaultRequestContext
 import io.soffa.foundation.core.security.TokenProvider
 import io.soffa.foundation.commons.Logger
-import io.soffa.foundation.core.db.TenantsLoader
+import io.soffa.foundation.core.TenantsLoader
 import io.soffa.foundation.core.pubsub.PubSubClientFactory
 import io.soffa.foundation.core.pubsub.PubSubMessenger
 import io.soffa.foundation.models.TokenType

@@ -1,23 +1,17 @@
-name: default
-
+name: release
 on:
   push:
-    branches-ignore:
-      - main
-      
-env:
-  IMAGE_NAME: ${{ github.repository }}
-  IMAGE_VERSION: ${{ github.run_number }}
-  PRV_MAVEN_URL: https://maven.pkg.github.com/soffa-io/artifacts,https://maven.pkg.github.com/startupstation/artifacts
-  PRV_MAVEN_USER: ${{ github.actor }}
-  PRV_MAVEN_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
+    branches:
+      - *
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    container: gradle:latest
     steps:
       - uses: actions/checkout@v2
-      - name: Check branch
-        run: |
-          gradle check
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Run checks
+        run: NO_PUBLISH=true gradle check

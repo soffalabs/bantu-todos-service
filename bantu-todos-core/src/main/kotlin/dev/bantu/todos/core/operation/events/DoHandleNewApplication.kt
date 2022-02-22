@@ -1,4 +1,4 @@
-package dev.bantu.todos.core.events
+package dev.bantu.todos.core.operation.events
 
 import dev.bantu.accounts.api.Accounts
 import dev.bantu.accounts.api.model.Application
@@ -19,9 +19,8 @@ open class DoHandleNewApplication(private val db: DB) : OnApplicationCreated {
 
     override fun handle(input: Application, context: RequestContext) {
         val tenantId = input.id!!.value
-        LOG.info("A new application [%s] was created, applying migrations", tenantId)
-        db.applyMigrations(tenantId)
-        db.applyMigrations("${tenantId}_test")
+        LOG.info("A new application [%s] was created, registering local datasources", tenantId)
+        db.register(arrayOf(tenantId, "${tenantId}_test"), true)
     }
 
 }
