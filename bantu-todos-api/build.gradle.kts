@@ -5,5 +5,5 @@ plugins {
 }
 
 dependencies {
-    api("io.soffa.foundation:soffa-foundation-api:${property("fnd.version")}")
+    api("io.soffa.foundation:foundation-api:${property("fnd.version")}")
 }
