@@ -1,9 +1,9 @@
 package dev.bantu.todos
 
 import com.intuit.karate.junit5.Karate
-import io.soffa.foundation.data.DB
-import io.soffa.foundation.security.TokenProvider
-import io.soffa.foundation.security.model.TokenType
+import io.soffa.foundation.core.db.DB
+import io.soffa.foundation.core.security.TokenProvider
+import io.soffa.foundation.models.TokenType
 import org.awaitility.Awaitility
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,14 +1,15 @@
 package dev.bantu.todos.gateways.config
 
-import dev.bantu.accounts.api.AccountClient
+import dev.bantu.accounts.api.Accounts
 import dev.bantu.accounts.api.operation.GetTenantList
+import io.soffa.foundation.core.AppConfig
+import io.soffa.foundation.core.context.DefaultRequestContext
+import io.soffa.foundation.core.security.TokenProvider
 import io.soffa.foundation.commons.Logger
-import io.soffa.foundation.config.AppConfig
-import io.soffa.foundation.context.RequestContext
-import io.soffa.foundation.data.TenantsLoader
-import io.soffa.foundation.pubsub.PubSubMessenger
-import io.soffa.foundation.security.TokenProvider
-import io.soffa.foundation.security.model.TokenType
+import io.soffa.foundation.core.db.TenantsLoader
+import io.soffa.foundation.core.pubsub.PubSubClientFactory
+import io.soffa.foundation.core.pubsub.PubSubMessenger
+import io.soffa.foundation.models.TokenType
 import org.springframework.stereotype.Component
 
 @Component
@@ -23,10 +24,10 @@ class LocalTenantsProvider(
     }
 
     override fun getTenantList(): Set<String> {
-        val operation = client.proxy(AccountClient.ID, GetTenantList::class.java);
+        val operation = PubSubClientFactory.of(GetTenantList::class.java, Accounts.ID, client)
         return try {
             val token = tokens.create(TokenType.JWT, app.name, mapOf("permissions" to "service")).value
-            val context = RequestContext().withAuthorization("Bearer $token")
+            val context = DefaultRequestContext().withAuthorization("Bearer $token")
             val res = operation.handle(null, context) ?: return emptySet()
             return res.tenants.toSet()
         } catch (e: Exception) {

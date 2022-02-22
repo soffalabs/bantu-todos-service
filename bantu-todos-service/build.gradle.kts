@@ -7,7 +7,8 @@ plugins {
 dependencies {
     implementation(project(":bantu-todos-core"))
 
-    implementation("io.soffa.foundation:soffa-foundation-service:${property("foundation.version")}")
-    implementation("io.soffa.foundation:soffa-foundation-support-pubsub:${property("foundation.version")}")
-    testImplementation("io.soffa.foundation:soffa-foundation-service-test:${property("foundation.version")}")
+    implementation("io.soffa.foundation:soffa-foundation-service:${property("fnd.version")}")
+    implementation("io.soffa.foundation:soffa-foundation-support-data:${property("fnd.version")}")
+    implementation("io.soffa.foundation:soffa-foundation-support-pubsub:${property("fnd.version")}")
+    testImplementation("io.soffa.foundation:soffa-foundation-service-test:${property("fnd.version")}")
 }

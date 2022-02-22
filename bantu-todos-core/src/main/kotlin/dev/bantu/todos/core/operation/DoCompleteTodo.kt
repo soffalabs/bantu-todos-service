@@ -6,7 +6,7 @@ import dev.bantu.todos.api.operation.CompleteTodo
 import dev.bantu.todos.core.data.TodoRepository
 import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.annotations.TenantRequired
-import io.soffa.foundation.context.RequestContext
+import io.soffa.foundation.core.RequestContext
 import io.soffa.foundation.errors.ResourceNotFoundException
 import javax.inject.Named
 

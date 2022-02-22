@@ -1,27 +1,28 @@
 package dev.bantu.todos.core.events
 
-import dev.bantu.accounts.api.model.CreateApplicationOutput
+import dev.bantu.accounts.api.Accounts
+import dev.bantu.accounts.api.model.Application
 import io.soffa.foundation.annotations.Handle
-import io.soffa.foundation.api.Operation
 import io.soffa.foundation.commons.Logger
-import io.soffa.foundation.context.RequestContext
-import io.soffa.foundation.data.DB
+import io.soffa.foundation.core.Operation
+import io.soffa.foundation.core.RequestContext
+import io.soffa.foundation.core.db.DB
 import io.soffa.foundation.models.commons.Ack
 import javax.inject.Named
 
 @Named
-@Handle(dev.bantu.accounts.api.Messages.APPLICATION_CREATED)
-class OnApplicationCreated(private val ds: DB) : Operation<CreateApplicationOutput, Ack> {
+@Handle(Accounts.APPLICATION_CREATED)
+open class OnApplicationCreated(private val db: DB) : Operation<Application, Ack> {
 
     companion object {
         val LOG = Logger.get(OnApplicationCreated::class.java)!!
     }
 
-    override fun handle(input: CreateApplicationOutput, context: RequestContext): Ack {
-        val tenantId = input.application!!.id!!.value
+    override fun handle(input: Application, context: RequestContext): Ack {
+        val tenantId = input.id!!.value
         LOG.info("A new application [%s] was created, applying migrations", tenantId)
-        ds.applyMigrations(tenantId)
-        ds.applyMigrations("${tenantId}_test")
+        db.applyMigrations(tenantId)
+        db.applyMigrations("${tenantId}_test")
         return Ack.OK
     }
 

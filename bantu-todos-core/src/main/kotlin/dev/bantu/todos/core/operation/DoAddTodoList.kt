@@ -6,8 +6,8 @@ import dev.bantu.todos.api.operation.AddTodo
 import dev.bantu.todos.core.data.TodoRepository
 import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.annotations.TenantRequired
+import io.soffa.foundation.core.RequestContext
 import io.soffa.foundation.commons.IdGenerator
-import io.soffa.foundation.context.RequestContext
 import java.time.Instant
 import javax.inject.Named
 

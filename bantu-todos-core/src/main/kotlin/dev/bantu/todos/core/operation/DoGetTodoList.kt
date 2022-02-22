@@ -5,7 +5,7 @@ import dev.bantu.todos.api.operation.GetTodoList
 import dev.bantu.todos.core.data.TodoRepository
 import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.annotations.TenantRequired
-import io.soffa.foundation.context.RequestContext
+import io.soffa.foundation.core.RequestContext
 import javax.inject.Named
 
 @Named

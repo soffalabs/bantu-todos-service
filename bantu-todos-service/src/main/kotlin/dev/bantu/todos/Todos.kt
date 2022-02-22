@@ -1,16 +1,11 @@
 package dev.bantu.todos
 
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class Todos {
+class Todos
 
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            SpringApplication.run(Todos::class.java, *args)
-        }
-    }
-
+fun main(args: Array<String>) {
+    runApplication<Todos>(*args)
 }
