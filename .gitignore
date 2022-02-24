@@ -42,7 +42,6 @@ node_modules
 build
 
 target
-application-local.yml
 /config
 .env
 *.log
