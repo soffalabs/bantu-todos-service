@@ -1,0 +1,9 @@
+DATABASE_URL: h2://mem/bantu-main
+LOGGING_FILE_NAME: /tmp/bantu/todos.log
+TOKEN_SECRET: jJJhjhjkh99dsdÒ
+PUBSUB_ADDRESSES: simple
+PORT: 8082
+
+app.pubsub:
+  clients.default:
+    subjects: ${spring.application.name},${PUBSUB_BROADCAST:bantu-services}*,bantu-accounts
