@@ -29,3 +29,14 @@ Feature: requests that should fail
         Then status 200
         And match response.done == true
 
+    Scenario: update a todo
+        Given path '/v1'
+        When method get
+        Then status 200
+
+        Given path '/v1/' + response.todos[0].id
+        And request { "content": "Update a todo" }
+        When method patch
+        Then status 200
+        And match response.id == "#string"
+
