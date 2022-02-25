@@ -42,7 +42,8 @@ class TodoRestAPI(
     }
 
     @PatchMapping("{id}")
-    override fun updateTodo(@Parameter(hidden = true) id: CompleteTodoInput, @RequestBody @Valid input: AddTodoInput, context: RequestContext): Todo {
-        return updateTodo.handle(UpdateTodoInput(id.id, input.content), context)
+    override fun updateTodo(@PathVariable id: String, @RequestBody @Valid input: UpdateTodoInput, context: RequestContext): Todo {
+        input.id = id
+        return updateTodo.handle(input, context)
     }
 }

@@ -4,10 +4,11 @@ import dev.bantu.todos.api.model.*
 import dev.bantu.todos.api.operation.AddTodo
 import dev.bantu.todos.api.operation.CompleteTodo
 import dev.bantu.todos.api.operation.GetTodoList
+import dev.bantu.todos.api.operation.UpdateTodo
 import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.annotations.BindOperation
-import io.soffa.foundation.core.RequestContext
 import io.soffa.foundation.commons.OpenApi
+import io.soffa.foundation.core.RequestContext
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
@@ -38,9 +39,9 @@ interface TodoAPI {
     @Operation(
         method = "PATCH",
         summary = "Update a todo task",
-        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to update it", example = "t_12345678")]
+        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to update", example = "t_12345678")]
     )
-    @BindOperation(CompleteTodo::class)
-    fun updateTodo(id: CompleteTodoInput, input: AddTodoInput, context: RequestContext): Todo
+    @BindOperation(UpdateTodo::class)
+    fun updateTodo(id:String, input: UpdateTodoInput, context: RequestContext): Todo
 
 }

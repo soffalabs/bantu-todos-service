@@ -18,6 +18,19 @@ Feature: requests that should fail
         Then status 200
         And match response == { todos: "#array" }
 
+    Scenario: update a todo
+        Given path '/v1'
+        When method get
+        Then status 200
+        * def id = response.todos[0].id
+
+        Given path '/v1/' + id
+        And header Authorization = "Bearer " + authToken
+        And request { "content": "Update a todo" }
+        When method patch
+        Then status 200
+        And match response == { id: "#(id)", content: "Update a todo", done: false, createdAt: '#number' }
+
     Scenario: complete todo
         Given path '/v1'
         When method get
@@ -28,19 +41,3 @@ Feature: requests that should fail
         When method patch
         Then status 200
         And match response.done == true
-
-    Scenario: update a todo
-        Given path '/v1'
-        When method get
-        Then status 200
-
-        * def id = response.todos[0].id
-
-        Given path '/v1/' + id
-        And header Authorization = "Bearer " + authToken
-        And request { "content": "Update a todo" }
-        When method patch
-        Then status 200
-        And match response.id == "#string"
-        And match response.content == "Update a todo"
-
