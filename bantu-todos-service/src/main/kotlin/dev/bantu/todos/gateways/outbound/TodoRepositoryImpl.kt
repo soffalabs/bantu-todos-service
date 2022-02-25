@@ -2,8 +2,8 @@ package dev.bantu.todos.gateways.outbound
 
 import dev.bantu.todos.api.model.Todo
 import dev.bantu.todos.core.data.TodoRepository
-import dev.bantu.todos.gateways.outbound.jpa.TodoJpaRepository
 import dev.bantu.todos.gateways.outbound.jpa.TodoEntity
+import dev.bantu.todos.gateways.outbound.jpa.TodoJpaRepository
 import org.springframework.stereotype.Component
 
 @Component

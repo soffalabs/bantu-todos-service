@@ -1,7 +1,6 @@
 package dev.bantu.todos.gateways.outbound.jpa
 
 import dev.bantu.todos.api.model.Todo
-import io.soffa.foundation.commons.BeanUtil
 import java.util.*
 import javax.persistence.*
 
