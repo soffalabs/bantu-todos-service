@@ -1,13 +1,11 @@
 package dev.bantu.todos.gateways.inbound
 
 import dev.bantu.todos.api.TodoAPI
-import dev.bantu.todos.api.model.AddTodoInput
-import dev.bantu.todos.api.model.CompleteTodoInput
-import dev.bantu.todos.api.model.Todo
-import dev.bantu.todos.api.model.TodoList
+import dev.bantu.todos.api.model.*
 import dev.bantu.todos.api.operation.AddTodo
 import dev.bantu.todos.api.operation.CompleteTodo
 import dev.bantu.todos.api.operation.GetTodoList
+import dev.bantu.todos.api.operation.UpdateTodo
 import dev.bantu.todos.core.App
 import io.soffa.foundation.annotations.Authenticated
 import io.soffa.foundation.core.RequestContext
@@ -26,6 +24,7 @@ class TodoRestAPI(
     private val getTodoList: GetTodoList,
     private val addTodo: AddTodo,
     private val completeTodo: CompleteTodo,
+    private val updateTodo: UpdateTodo,
 ) : TodoAPI {
 
     @GetMapping
@@ -42,5 +41,8 @@ class TodoRestAPI(
         return completeTodo.handle(input, context)
     }
 
-
+    @PatchMapping("{id}")
+    override fun updateTodo(@Parameter(hidden = true) completeInput: CompleteTodoInput, @RequestBody @Valid input: AddTodoInput,  context: RequestContext): TodoStatus {
+        return updateTodo.handle(UpdateTodoInput(completeInput.id, input.content), context)
+    }
 }

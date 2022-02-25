@@ -1,9 +1,6 @@
 package dev.bantu.todos.api
 
-import dev.bantu.todos.api.model.AddTodoInput
-import dev.bantu.todos.api.model.CompleteTodoInput
-import dev.bantu.todos.api.model.Todo
-import dev.bantu.todos.api.model.TodoList
+import dev.bantu.todos.api.model.*
 import dev.bantu.todos.api.operation.AddTodo
 import dev.bantu.todos.api.operation.CompleteTodo
 import dev.bantu.todos.api.operation.GetTodoList
@@ -37,5 +34,13 @@ interface TodoAPI {
     )
     @BindOperation(CompleteTodo::class)
     fun completeTodo(input: CompleteTodoInput, context: RequestContext): Todo
+
+    @Operation(
+        method = "PATCH",
+        summary = "Update a todo task",
+        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to update it", example = "t_12345678")]
+    )
+    @BindOperation(CompleteTodo::class)
+    fun updateTodo(id: CompleteTodoInput, input: AddTodoInput, context: RequestContext): TodoStatus
 
 }

@@ -37,6 +37,7 @@ Feature: requests that should fail
         * def id = response.todos[0].id
 
         Given path '/v1/' + id
+        And header Authorization = "Bearer " + authToken
         And request { "content": "Update a todo" }
         When method patch
         Then status 200
