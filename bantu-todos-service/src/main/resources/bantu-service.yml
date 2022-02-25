@@ -15,7 +15,7 @@ app:
     default-ttl: 5
   consul.tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
   db:
-    tables-prefix: ${service-id}
+    tables-prefix: ${service-name}
     datasources:
       default:
         url: ${DATABASE_URL}?schema=public
