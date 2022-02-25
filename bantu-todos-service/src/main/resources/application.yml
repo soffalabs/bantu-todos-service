@@ -1,37 +1,6 @@
-spring.application.name: bantu-todos
-server.servlet.contextPath: ${CONTEXT_PATH:/todos}
-logging.level.dev.bantu: ${LOG_LEVEL:DEBUG}
-
-app.package: dev.bantu
-
-app.db:
-  tables-prefix: todos
-  datasources:
-    default:
-      url: ${DATABASE_URL}?schema=public
-      migration: false
-    __TENANT__:
-      url: ${DATABASE_URL}?schema=__TENANT__
-      migration: true
-
-app.security.tokens:
-  issuer: ${TOKEN_ISSUER:bantu}
-  secret: ${TOKEN_SECRET}
-  default-ttl: 5
-
-app.consul.tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
-
-app.nats.clients.default:
-  broadcast: ${BROADCAST_SUBJECT:bantu-services}
-
-app.pubsub:
-  clients.default:
-    subjects: ${spring.application.name},${PUBSUB_BROADCAST:bantu-services}*
+service-name: todos
 
 spring.config.import:
-  - classpath:application-foundation.yml
-  - classpath:application-foundation-pubsub.yml
-  - classpath:openapi.yml
+  - classpath:bantu-service.yml
 
-spring.profiles.group.production: json-logs,foundation-vault,foundation-consul
 

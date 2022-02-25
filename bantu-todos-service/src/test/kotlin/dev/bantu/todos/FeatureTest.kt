@@ -1,6 +1,7 @@
 package dev.bantu.todos
 
 import com.intuit.karate.junit5.Karate
+import dev.bantu.accounts.api.Accounts
 import io.soffa.foundation.core.db.DB
 import io.soffa.foundation.core.security.TokenProvider
 import io.soffa.foundation.models.TokenType
@@ -44,7 +45,7 @@ class FeatureTest {
         val token = tokens.create(
             TokenType.JWT, "app-0001", mapOf(
                 "tenant" to "tx01",
-                "permissions" to "application"
+                "permissions" to Accounts.APP_PERMISSION
             ), 30
         )
         return Karate.run(
@@ -58,7 +59,7 @@ class FeatureTest {
     fun testErrors(): Karate {
         val token = tokens.create(
             TokenType.JWT, "app-0001", mapOf(
-                "permissions" to "application",
+                "permissions" to Accounts.APP_PERMISSION,
                 "tenant" to "tx02" // This tenant does not exist
             )
         )

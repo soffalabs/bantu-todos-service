@@ -1,0 +1,33 @@
+
+spring.application.name: bantu-${service-name}
+server.servlet.contextPath: ${CONTEXT_PATH:/${service-name}}
+logging.level.dev.bantu: ${LOG_LEVEL:DEBUG}
+app:
+  package: dev.bantu
+  tenants-provider.pubsub:
+    enabled: true
+    subject: bantu-accounts
+  pubsub.clients.default:
+    subjects: ${spring.application.name},${BROADCAST_SUBJECT:bantu-services}*
+  security.tokens:
+    issuer: ${TOKEN_ISSUER:bantu}
+    secret: ${TOKEN_SECRET}
+    default-ttl: 5
+  consul.tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
+  db:
+    tables-prefix: ${service-id}
+    datasources:
+      default:
+        url: ${DATABASE_URL}?schema=public
+        migration: default
+      __TENANT__:
+        url: ${DATABASE_URL}?schema=__TENANT__
+        migration: tenants
+
+spring.config.import:
+  - classpath:application-foundation.yml
+  - classpath:application-foundation-pubsub.yml
+  - classpath:openapi.yml
+
+spring.profiles.group.production: json-logs,foundation-vault,foundation-consul
+
