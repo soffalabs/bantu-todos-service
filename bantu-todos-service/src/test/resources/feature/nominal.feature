@@ -42,6 +42,5 @@ Feature: requests that should fail
         When method patch
         Then status 200
         And match response.id == "#string"
-        And response.id == id
-        And response.content == "Update a todo"
+        And match response.content == "Update a todo"
 
