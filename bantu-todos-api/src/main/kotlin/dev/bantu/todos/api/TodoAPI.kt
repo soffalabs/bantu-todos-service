@@ -41,6 +41,6 @@ interface TodoAPI {
         parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to update it", example = "t_12345678")]
     )
     @BindOperation(CompleteTodo::class)
-    fun updateTodo(id: CompleteTodoInput, input: AddTodoInput, context: RequestContext): TodoStatus
+    fun updateTodo(id: CompleteTodoInput, input: AddTodoInput, context: RequestContext): Todo
 
 }
