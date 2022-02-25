@@ -34,9 +34,13 @@ Feature: requests that should fail
         When method get
         Then status 200
 
-        Given path '/v1/' + response.todos[0].id
+        * def id = response.todos[0].id
+
+        Given path '/v1/' + id
         And request { "content": "Update a todo" }
         When method patch
         Then status 200
         And match response.id == "#string"
+        And response.id == id
+        And response.content == "Update a todo"
 
