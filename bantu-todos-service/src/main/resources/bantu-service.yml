@@ -7,6 +7,7 @@ app:
   tenants-provider.pubsub:
     enabled: true
     subject: bantu-accounts
+    token-permission: bantu-service
   pubsub.clients.default:
     subjects: ${spring.application.name},${BROADCAST_SUBJECT:bantu-services}*
   security.tokens:
