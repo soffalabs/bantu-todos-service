@@ -1,7 +1,6 @@
 plugins {
-    id("soffa.kotlin")
-    id("soffa.springboot")
-    id("com.google.cloud.tools.jib").version("3.2.0")
+    id("foundation.kotlin")
+    id("foundation.springboot")
 }
 
 dependencies {

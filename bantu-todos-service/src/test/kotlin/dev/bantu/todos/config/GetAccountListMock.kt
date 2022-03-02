@@ -1,9 +1,9 @@
 package dev.bantu.todos.config
 
-import dev.bantu.accounts.api.model.TenantList
 import io.soffa.foundation.annotations.Handle
 import io.soffa.foundation.core.Operation
 import io.soffa.foundation.core.RequestContext
+import io.soffa.foundation.core.models.TenantList
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 

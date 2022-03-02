@@ -1,6 +1,6 @@
 plugins {
-    id("soffa.kotlin")
-    id("soffa.test.junit5")
+    id("foundation.kotlin")
+    id("foundation.test.junit5")
     //id("soffa.maven-publish")
 }
 

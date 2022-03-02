@@ -31,4 +31,5 @@ spring.config.import:
   - classpath:openapi.yml
 
 spring.profiles.group.production: json-logs,foundation-vault,foundation-consul
+spring.jackson.property-naming-strategy: com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy
 

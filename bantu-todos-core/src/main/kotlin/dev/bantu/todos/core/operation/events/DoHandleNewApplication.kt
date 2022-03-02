@@ -1,8 +1,8 @@
 package dev.bantu.todos.core.operation.events
 
-import dev.bantu.accounts.api.Accounts
-import dev.bantu.accounts.api.model.Application
-import dev.bantu.accounts.api.operation.events.OnApplicationCreated
+import dev.bantu.accounts.Accounts
+import dev.bantu.accounts.api.events.OnApplicationCreated
+import dev.bantu.accounts.api.models.Application
 import io.soffa.foundation.annotations.Handle
 import io.soffa.foundation.commons.Logger
 import io.soffa.foundation.core.RequestContext
@@ -11,7 +11,7 @@ import javax.inject.Named
 
 @Named
 @Handle(Accounts.APPLICATION_CREATED)
-open class DoHandleNewApplication(private val db: DB) : OnApplicationCreated {
+class DoHandleNewApplication(private val db: DB) : OnApplicationCreated {
 
     companion object {
         val LOG = Logger.get(DoHandleNewApplication::class.java)!!

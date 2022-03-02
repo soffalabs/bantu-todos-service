@@ -7,11 +7,11 @@ buildscript {
         }
     }
     dependencies {
-        classpath("io.soffa.gradle:soffa-gradle-plugin:2.2.4")
+        classpath("io.soffa.foundation:foundation-gradle-plugin:1.0.1")
     }
 }
 
-apply(plugin = "soffa.sonatype-legacy-publish")
+apply(plugin = "foundation.sonatype-legacy-publish")
 
 
 subprojects {

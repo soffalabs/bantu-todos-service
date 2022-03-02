@@ -1,8 +1,8 @@
 package dev.bantu.todos
 
-import dev.bantu.accounts.api.Accounts
-import dev.bantu.accounts.api.model.Application
-import dev.bantu.accounts.api.model.ApplicationId
+import dev.bantu.accounts.Accounts
+import dev.bantu.accounts.api.models.Application
+import dev.bantu.accounts.api.models.ApplicationId
 import io.soffa.foundation.core.context.DefaultRequestContext
 import io.soffa.foundation.core.db.DB
 import io.soffa.foundation.core.messages.Message

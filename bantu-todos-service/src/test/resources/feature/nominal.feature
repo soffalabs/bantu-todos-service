@@ -29,7 +29,7 @@ Feature: requests that should fail
         And request { "content": "Update a todo" }
         When method patch
         Then status 200
-        And match response == { id: "#(id)", content: "Update a todo", done: false, createdAt: '#number' }
+        And match response == { id: "#(id)", content: "Update a todo", done: false, created_at: '#number' }
 
     Scenario: complete todo
         Given path '/v1'

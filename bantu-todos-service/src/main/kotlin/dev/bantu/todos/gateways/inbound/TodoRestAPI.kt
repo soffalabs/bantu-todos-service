@@ -1,6 +1,6 @@
 package dev.bantu.todos.gateways.inbound
 
-import dev.bantu.accounts.api.Accounts
+import dev.bantu.accounts.Accounts
 import dev.bantu.todos.api.TodoAPI
 import dev.bantu.todos.api.model.*
 import dev.bantu.todos.api.operation.AddTodo
