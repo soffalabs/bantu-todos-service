@@ -2,6 +2,7 @@ package dev.bantu.todos.core.operation
 
 import dev.bantu.todos.api.model.AddTodoInput
 import dev.bantu.todos.api.model.Todo
+import dev.bantu.todos.api.model.TodoStatus
 import dev.bantu.todos.api.operation.AddTodo
 import dev.bantu.todos.core.data.TodoRepository
 import io.soffa.foundation.annotations.Authenticated
@@ -9,10 +10,11 @@ import io.soffa.foundation.annotations.TenantRequired
 import io.soffa.foundation.commons.IdGenerator
 import io.soffa.foundation.core.RequestContext
 import java.time.Instant
+import java.util.*
 import javax.inject.Named
 
 @Named
-open class DoAddTodoList(private val todos: TodoRepository) : AddTodo {
+ class DoAddTodo(private val todos: TodoRepository) : AddTodo {
 
     @TenantRequired
     @Authenticated
@@ -20,10 +22,10 @@ open class DoAddTodoList(private val todos: TodoRepository) : AddTodo {
         val todo = Todo(
             IdGenerator.shortUUID("t"),
             input.content!!,
-            false,
-            Instant.now().toEpochMilli()
+            TodoStatus.PENDING,
+            Date.from( Instant.now() )
         )
-        todos.save(todo)
+        todos.insert(todo)
         return todo
     }
 

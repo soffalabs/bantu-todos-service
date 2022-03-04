@@ -6,7 +6,7 @@ import dev.bantu.accounts.api.models.Application
 import io.soffa.foundation.annotations.Handle
 import io.soffa.foundation.commons.Logger
 import io.soffa.foundation.core.RequestContext
-import io.soffa.foundation.core.db.DB
+import io.soffa.foundation.core.data.DB
 import javax.inject.Named
 
 @Named

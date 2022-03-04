@@ -9,7 +9,7 @@ import io.soffa.foundation.core.RequestContext
 import javax.inject.Named
 
 @Named
-open class DoGetTodoList(private val todos: TodoRepository): GetTodoList {
+ class DoGetTodoList(private val todos: TodoRepository): GetTodoList {
 
     @TenantRequired
     @Authenticated

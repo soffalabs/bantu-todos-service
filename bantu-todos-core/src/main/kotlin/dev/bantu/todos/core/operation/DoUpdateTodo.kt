@@ -11,14 +11,14 @@ import io.soffa.foundation.errors.ResourceNotFoundException
 import javax.inject.Named
 
 @Named
-open class DoUpdateTodo(private val todos: TodoRepository) : UpdateTodo {
+class DoUpdateTodo(private val todos: TodoRepository) : UpdateTodo {
 
     @TenantRequired
     @Authenticated
     override fun handle(input: UpdateTodoInput, context: RequestContext): Todo {
-        val todo = todos.findById(input.id!!) ?: throw ResourceNotFoundException("Todo not found")
+        val todo = todos.findById(input.id!!).orElseThrow { ResourceNotFoundException("Todo not found") }
         todo.content = input.content
-        todos.save(todo)
+        todos.update(todo)
         return todo
     }
 }

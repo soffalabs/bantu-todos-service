@@ -2,7 +2,7 @@ package dev.bantu.todos
 
 import com.intuit.karate.junit5.Karate
 import dev.bantu.accounts.Accounts
-import io.soffa.foundation.core.db.DB
+import io.soffa.foundation.core.data.DB
 import io.soffa.foundation.core.security.TokenProvider
 import io.soffa.foundation.models.TokenType
 import org.awaitility.Awaitility

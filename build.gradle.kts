@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("io.soffa.foundation:foundation-gradle-plugin:1.0.1")
+        classpath("io.soffa.foundation:foundation-gradle-plugin:1.0.2")
     }
 }
 

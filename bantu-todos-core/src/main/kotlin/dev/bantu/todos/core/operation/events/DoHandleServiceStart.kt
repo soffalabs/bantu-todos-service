@@ -3,7 +3,7 @@ package dev.bantu.todos.core.operation.events
 import dev.bantu.accounts.Accounts
 import dev.bantu.todos.core.App
 import io.soffa.foundation.core.RequestContext
-import io.soffa.foundation.core.db.DB
+import io.soffa.foundation.core.data.DB
 import io.soffa.foundation.core.events.OnServiceStarted
 import io.soffa.foundation.core.events.ServiceInfo
 import javax.inject.Named

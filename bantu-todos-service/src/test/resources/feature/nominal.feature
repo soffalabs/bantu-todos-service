@@ -10,7 +10,7 @@ Feature: requests that should fail
         When method post
         Then status 201
         And match response.id == "#string"
-        And match response.done == false
+        And match response.status == "pending"
 
     Scenario: list todos
         Given path '/v1'
@@ -29,7 +29,7 @@ Feature: requests that should fail
         And request { "content": "Update a todo" }
         When method patch
         Then status 200
-        And match response == { id: "#(id)", content: "Update a todo", done: false, created_at: '#number' }
+        And match response == { id: "#(id)", content: "Update a todo", status: "pending", created: '#number' }
 
     Scenario: complete todo
         Given path '/v1'
@@ -40,4 +40,4 @@ Feature: requests that should fail
         And header Authorization = "Bearer " + authToken
         When method patch
         Then status 200
-        And match response.done == true
+        And match response.status == "done"

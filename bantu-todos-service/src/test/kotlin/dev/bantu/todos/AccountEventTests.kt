@@ -4,7 +4,7 @@ import dev.bantu.accounts.Accounts
 import dev.bantu.accounts.api.models.Application
 import dev.bantu.accounts.api.models.ApplicationId
 import io.soffa.foundation.core.context.DefaultRequestContext
-import io.soffa.foundation.core.db.DB
+import io.soffa.foundation.core.data.DB
 import io.soffa.foundation.core.messages.Message
 import io.soffa.foundation.core.pubsub.MessageHandler
 import org.junit.jupiter.api.Assertions.assertTrue
