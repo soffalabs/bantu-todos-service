@@ -7,16 +7,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath("io.soffa.foundation:foundation-gradle-plugin:1.0.2")
+        classpath("dev.soffa.foundation:foundation-gradle-plugin:1.0.1")
     }
 }
-
-apply(plugin = "foundation.sonatype-legacy-publish")
 
 
 subprojects {
     repositories {
-        mavenLocal()
-        mavenCentral()
+        apply(plugin = "foundation.default-repositories")
     }
 }
