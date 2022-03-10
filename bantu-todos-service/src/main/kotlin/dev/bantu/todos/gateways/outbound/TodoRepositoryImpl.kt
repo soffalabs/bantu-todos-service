@@ -1,9 +1,9 @@
 package dev.bantu.todos.gateways.outbound
 
-import dev.bantu.todos.api.model.Todo
-import dev.bantu.todos.core.data.TodoRepository
-import io.soffa.foundation.core.data.DB
-import io.soffa.foundation.service.data.SimpleEntityRepository
+import dev.bantu.todos.api.schema.Todo
+import dev.bantu.todos.ports.data.TodoRepository
+import dev.soffa.foundation.data.DB
+import dev.soffa.foundation.data.SimpleEntityRepository
 import org.springframework.stereotype.Component
 
 @Component

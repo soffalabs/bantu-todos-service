@@ -5,6 +5,5 @@ plugins {
 
 dependencies {
     api(project(":bantu-todos-api"))
-    api("dev.bantu.api:bantu-accounts-api:${property("accounts.version")}")
-    api("io.soffa.foundation:foundation-application:${property("foundation.version")}")
+    api("dev.soffa.foundation:foundation-core:${property("f4j.version")}")
 }

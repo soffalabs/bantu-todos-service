@@ -1,47 +1,61 @@
 package dev.bantu.todos.api
 
-import dev.bantu.todos.api.model.*
-import dev.bantu.todos.api.operation.AddTodo
-import dev.bantu.todos.api.operation.CompleteTodo
-import dev.bantu.todos.api.operation.GetTodoList
-import dev.bantu.todos.api.operation.UpdateTodo
-import io.soffa.foundation.annotations.Authenticated
-import io.soffa.foundation.annotations.BindOperation
-import io.soffa.foundation.commons.OpenApi
-import io.soffa.foundation.core.RequestContext
+import dev.bantu.accounts.Accounts
+import dev.bantu.todos.api.operations.AddTodo
+import dev.bantu.todos.api.operations.CompleteTodo
+import dev.bantu.todos.api.operations.GetTodoList
+import dev.bantu.todos.api.operations.UpdateTodo
+import dev.bantu.todos.api.operations.AddTodoInput
+import dev.bantu.todos.api.schema.Todo
+import dev.bantu.todos.api.schema.TodoList
+import dev.bantu.todos.api.operations.UpdateTodoInput
+import dev.soffa.foundation.annotations.Authenticated
+import dev.soffa.foundation.annotations.BindOperation
+import dev.soffa.foundation.context.Context
+import dev.soffa.foundation.openapi.OpenApi
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
-import javax.ws.rs.Path
+import javax.annotation.security.RolesAllowed
 
 @Authenticated
 @SecurityRequirement(name = OpenApi.BASIC_AUTH)
-@Path("/todos")
+@RolesAllowed(Accounts.APP_PERMISSION)
 interface TodoAPI {
 
-    @Operation(method = "GET", summary = "Retrieve todos linked to your application")
+    @Operation(summary = "Retrieve todos linked to your application")
     @BindOperation(GetTodoList::class)
-    fun todos(context: RequestContext): TodoList
-
-    @Operation(method = "POST", summary = "Add a new todo")
-    @BindOperation(AddTodo::class)
-    fun addTodo(input: AddTodoInput, context: RequestContext): Todo
+    fun todos(context: Context): TodoList
 
     @Operation(
-        method = "PATCH",
-        summary = "Mark todo ask complete",
-        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to mark complete", example = "t_12345678")]
+        summary = "Add a new todo",
+    )
+    @BindOperation(AddTodo::class)
+    fun addTodo(input: AddTodoInput, context: Context): Todo
+
+    @Operation(
+        summary = "Mark todo as DONE",
+        parameters = [Parameter(
+            name = "id",
+            `in` = ParameterIn.PATH,
+            description = "Id of the TODO to update",
+            example = "t_12345678"
+        )]
     )
     @BindOperation(CompleteTodo::class)
-    fun completeTodo(input: CompleteTodoInput, context: RequestContext): Todo
+    fun completeTodo(id: String, context: Context): Todo
 
     @Operation(
-        method = "PATCH",
-        summary = "Update a todo task",
-        parameters = [Parameter(name = "id", `in` = ParameterIn.PATH, description = "Id of the todo to update", example = "t_12345678")]
+        summary = "Update a todo",
+        parameters = [Parameter(
+            name = "id",
+            `in` = ParameterIn.PATH,
+            description = "Id of the TODO to update",
+            example = "t_12345678"
+        )]
     )
     @BindOperation(UpdateTodo::class)
-    fun updateTodo(id:String, input: UpdateTodoInput, context: RequestContext): Todo
+    fun updateTodo(id: String, input: UpdateTodoInput, context: Context): Todo
 
 }

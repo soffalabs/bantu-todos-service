@@ -1,49 +1,49 @@
 package dev.bantu.todos.gateways.inbound
 
-import dev.bantu.accounts.Accounts
 import dev.bantu.todos.api.TodoAPI
-import dev.bantu.todos.api.model.*
-import dev.bantu.todos.api.operation.AddTodo
-import dev.bantu.todos.api.operation.CompleteTodo
-import dev.bantu.todos.api.operation.GetTodoList
-import dev.bantu.todos.api.operation.UpdateTodo
-import io.soffa.foundation.annotations.Authenticated
-import io.soffa.foundation.core.RequestContext
-import io.swagger.v3.oas.annotations.Parameter
+import dev.bantu.todos.api.operations.AddTodo
+import dev.bantu.todos.api.operations.CompleteTodo
+import dev.bantu.todos.api.operations.GetTodoList
+import dev.bantu.todos.api.operations.UpdateTodo
+import dev.bantu.todos.api.operations.AddTodoInput
+import dev.bantu.todos.api.schema.Todo
+import dev.bantu.todos.api.operations.UpdateTodoInput
+import dev.soffa.foundation.context.Context
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
-import javax.annotation.security.RolesAllowed
 import javax.validation.Valid
 
 @RestController
 @RequestMapping(path = ["v1"], produces = [MediaType.APPLICATION_JSON_VALUE])
-@Authenticated
-@RolesAllowed(Accounts.APP_PERMISSION)
 class TodoRestAPI(
-    private val getTodoList: GetTodoList,
-    private val addTodo: AddTodo,
-    private val completeTodo: CompleteTodo,
-    private val updateTodo: UpdateTodo,
+    val getTodoList: GetTodoList,
+    val addTodo: AddTodo,
+    val completeTodo: CompleteTodo,
+    val updateTodo: UpdateTodo,
 ) : TodoAPI {
 
     @GetMapping
-    override fun todos(context: RequestContext): TodoList = getTodoList.handle(context)
+    override fun todos(context: Context) =  getTodoList.handle(context)!!
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    override fun addTodo(@RequestBody @Valid input: AddTodoInput, context: RequestContext): Todo {
+    @ResponseStatus(code = HttpStatus.CREATED)
+    override fun addTodo(@RequestBody @Valid input: AddTodoInput, context: Context): Todo {
         return addTodo.handle(input, context)
     }
 
     @PatchMapping("{id}/done")
-    override fun completeTodo(@Parameter(hidden = true) input: CompleteTodoInput, context: RequestContext): Todo {
-        return completeTodo.handle(input, context)
+    override fun completeTodo(@PathVariable id: String, context: Context): Todo {
+        return completeTodo.handle(id, context)
     }
 
     @PatchMapping("{id}")
-    override fun updateTodo(@PathVariable id: String, @RequestBody @Valid input: UpdateTodoInput, context: RequestContext): Todo {
-        input.id = id
+    override fun updateTodo(
+        @PathVariable id: String,
+        @RequestBody @Valid input: UpdateTodoInput,
+        context: Context
+    ): Todo {
+        input.apply { this.id = id }
         return updateTodo.handle(input, context)
     }
 }
