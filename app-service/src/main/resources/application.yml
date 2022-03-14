@@ -1,0 +1,36 @@
+service-name: todos
+service-version: 0.1.1
+
+# ----------------------------------------------------------------------------------------------------------------------
+# COMMONS BANTU CONFIG
+# ----------------------------------------------------------------------------------------------------------------------
+
+app:
+  name: bantu-${service-name}
+  tenants-provider.pubsub:
+    enabled: true
+    subject: bantu-accounts
+    token-permission: bantu-service
+  pubsub:
+    enabled: true
+    clients.default.subjects: ${app.name},${BROADCAST_SUBJECT:bantu-services}*
+  security.tokens:
+    issuer: ${TOKEN_ISSUER:bantu}
+    secret: ${TOKEN_SECRET}
+    default-ttl: 5
+  consul:
+    tags: ${CONSUL_TAGS:role=api,prefix=${server.servlet.contextPath}}
+  db:
+    tables-prefix: ${service-name}
+    datasources:
+      default:
+        url: ${DATABASE_URL}?schema=public
+        migration: default
+      __TENANT__:
+        url: ${DATABASE_URL}?schema=__TENANT__
+        migration: tenants
+
+logging.level.dev.bantu: ${LOG_LEVEL:DEBUG}
+jackson.property-naming-strategy: SNAKE_CASE
+server.servlet.contextPath: ${CONTEXT_PATH:/${service-name}}
+environments.production.include: json-logs,foundation-vault,foundation-consul
