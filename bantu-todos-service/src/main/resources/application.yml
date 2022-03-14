@@ -1,6 +1,0 @@
-service-name: todos
-
-spring.config.import:
-  - classpath:bantu-service.yml
-
-
